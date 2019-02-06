@@ -40,7 +40,7 @@ gem 'foundation-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mini_racer', platforms: :ruby
-gem 'mysql2'
+
 #stripe
 gem 'stripe'
 
