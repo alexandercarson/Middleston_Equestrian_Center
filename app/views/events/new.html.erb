@@ -1,0 +1,31 @@
+<br>
+<%= bootstrap_form_for(@event) do |f| %>
+<% if @event.errors.any? %>
+<div id="error_explanation-event">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@event) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+    <%= f.time_field :time %>
+    <%= f.text_area :description %>
+    <%= f.text_area :notes %>
+
+    <%= f.date_select('date',
+          options = { start_year: 2017, order: [:month, :day, :year]},
+          html_options = { class: 'select-date'})%>
+    <%= f.submit "Submit", class: 'btn btn-success' %> <%= link_to "Back", user_path(@current_user), class:'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Home", user_path(@current_user), class: 'btn btn-sm btn-primary' %>
+  <% end %>
+</div>

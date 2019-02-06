@@ -1,0 +1,26 @@
+<br>
+<%= bootstrap_form_for(@coggin) do |f| %>
+<% if @coggin.errors.any? %>
+<div id="error_explanation-coggin">
+        <h2><%= pluralize(@coggin.errors.count, "error") %> prohibited this coggin from being saved:</h2>
+
+        <ul>
+        <% @coggin.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@coggin) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+    <%= f.file_field :coggin %>
+    <br />
+    <%= f.submit "Submit", class: 'btn btn-success' %> <%= link_to "Back", user_path(@current_user), class:'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Home", user_path(@current_user), class: 'btn btn-sm btn-primary' %>
+  <% end %>
+</div>

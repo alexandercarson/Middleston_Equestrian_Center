@@ -1,0 +1,66 @@
+
+    
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+          <div class="card " style="width: 20rem;">
+            <h4 class="card-header text-center"><%= @horse.barn_name %> </h4>
+              <%= image_tag @horse.picture.url, :class => "card-img-top" %>
+              <div class="card-body text-center">
+                <h5> Owner: <%= @horse.user.name %></h5>
+                <p class="card-text"><p>Breed: <%= @horse.breed %><br /> 
+                                    Discipline: <%= @horse.discipline %><br />
+                                    <br /></p>
+            <h4 class="card-header lead">Registered Name: <br /><%= @horse.registered_name %> </h4>
+      </div>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+      <% if current_user.admin? %>
+      <%= link_to 'Update Horse', edit_horse_path(params[:id]), class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to 'View Farrier', farrier_path(@horse.farrier.id), class: "btn btn-info" %>
+      <%= link_to 'View Vet', veterinarian_path(@horse.veterinarian.id), class: "btn btn-secondary"%>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class='container'>
+  <div class="row text-center">
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="charge-list" data-toggle="list-charges" href="#charge-lists" role="tab" aria-controls="charges">Charges</a>
+        <a class="list-group-item list-group-item-action" id="event-lists" data-toggle="list-events" href="#event-lists" role="tab" aria-controls="events">Events</a>
+        <a class="list-group-item list-group-item-action" id="note-lists" data-toggle="list-notes" href="#note-lists" role="tab" aria-controls="notes">Notes</a>
+      </div></a>
+    </div>
+    <div class="col-8 anyList">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-charges" role="tabpanel" aria-labelledby="charge-list">
+              <% @charges.each do |c| %>
+                <% if c.horse.id === @horse.id %>
+                  <a href= <%= charge_path(c.id) %>>
+                  <p><%= c.date.strftime("%B %d, %Y") %>: <%= c.description %>: $<%= c.amount %></p>
+                <% end %>
+              <% end %>
+              </div>
+          </div>
+            <div class="tab-pane fade" id="list-events" role="tabpanel" aria-labelledby="events-list">
+              <% @events.each do |e| %>
+                  <% if e.horse.id === @horse.id %>
+                    <a href= <%= event_path(e.id) %>>
+                    <p><%= e.date.strftime("%B %d, %Y") %> <%= e.time %> <%= e.description %></p>
+                <% end %>
+              <% end %>
+            </div>
+              <div class="tab-pane fade" id="list-notes" role="tabpanel" aria-labelledby="notes-list">
+                <% @notes.each do |n| %>
+                <a href= <%= note_path(n.id) %>></a>
+                <% if n.horse.id === @horse.id %>
+                  <p><%= n.created_at.strftime("%b. %d, %Y") %> <%= n.text %></p>
+                <% end %>
+              <% end %>
+              </div>
+      </div>
+    </div>
+  </div>
+</div> 

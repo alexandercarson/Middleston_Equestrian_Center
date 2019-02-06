@@ -1,0 +1,25 @@
+<br></br>
+<%= simple_form_for @note do |f| %>
+<% if @note.errors.any? %>
+<div id="error_explanation-note">
+        <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+        <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <div class='container'>
+  <%= bootstrap_form_for(@note) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+    <%= f.text_area :text %>
+    <%= f.submit "Submit", class: 'btn btn-success' %> <%= link_to "Back", :back, class:'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Home", user_path(@current_user), class: 'btn btn-sm btn-primary' %>
+  <% end %>
+</div>

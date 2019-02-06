@@ -1,0 +1,11 @@
+<br />
+<div class='container'>
+  <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= f.email_field :email %>
+    <%= f.password_field :password %>
+    <%= f.submit "Log In", class: 'btn btn-success' %> <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
+    <br />
+    <%= render "devise/shared/links" %>
+    <br />
+  <% end %>
+</div>

@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+          <h1><%= @user.name %></h1>
+          <p><%= @user.email %><br />
+          <%= @user.phone_number %><br />
+          <%= @user.address %> <br />
+          <%= @user.city %>, <%= @user.state %> <%= @user.zip_code %></p>
+    </div>
+      <div class="col">
+          <% if current_user.admin? %>
+          <h3 class='text-center'>All Horses</h3>
+          <% @horse.each do |h| %>
+          <a class="list-group-item list-group-item-action " href=<%= horse_path(h.id) %>><%= h.barn_name %></a>
+          <% end %>
+        </div>
+      </div>
+
+      <hr>
+            <!-------- Admin Add/View Roles-------->
+  <div class="row">
+      <div class="col">
+        <div class="list-group">
+          <a href= <%= new_horse_path %> class="list-group-item list-group-mine list-group-item-action">Add New Horse</a>
+          <a href= <%= new_coggin_path %> class="list-group-item list-group-mine list-group-item-action">Add New Coggins File</a>
+          <a href= <%= new_charge_path %> class="list-group-item list-group-mine list-group-item-action">Add New Charge</a>
+          <a href= <%= new_event_path %> class="list-group-item list-group-mine list-group-item-action">Add New Event</a>
+          <a href= <%= new_problem_path %> class="list-group-item list-group-mine list-group-item-action">Add New Problem</a>
+          <a href= <%= new_note_path %> class="list-group-item list-group-mine list-group-item-action">Add New Note</a>
+          <a href= <%= veterinarian_path %> class="list-group-item list-group-mine list-group-item-action">View Active Veterinarians</a>
+          <a href= <%= new_veterinarian_path %> class="list-group-item list-group-mine list-group-item-action">Add New Veterinarian</a>
+          <a href= <%= farriers_path %> class="list-group-item list-group-mine list-group-item-action">View Active Farriers</a>
+          <a href= <%= new_farrier_path %> class="list-group-item list-group-mine list-group-item-action">Add New Farrier</a>
+        </div>
+    </div>
+  </div>
+
+  <% else %>
+<!--------Non Admin View Below--------->
+
+<!--Show All User charge/event/notes for specified user(s) horse(s)-->
+<% end %>
+<% end %>

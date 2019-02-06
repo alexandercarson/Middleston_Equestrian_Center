@@ -1,0 +1,21 @@
+<div class='container'>
+  <h2 class='form_header'>Sign up</h2>
+    <p class='text-muted'> All Fields Are Required!</p>
+    <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.text_field :name, required: true%>
+      <%= f.number_field :phone_number, required: true %>
+      <%= f.text_field :address %>
+      <%= f.text_field :city %>
+      <%= f.select :state, State.all.collect { |s| [s.state_name, s.state_code] } %>
+      <%= f.number_field :zip_code %>
+      <%= f.email_field :email, required: true, autofocus: true %>
+      <%= f.password_field :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      <%= f.password_field :password_confirmation, label: 'Confirm Password **' %>
+      <%= f.submit "Sign Up", class: 'btn btn-outline-info' %> 
+        <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
+      <br />
+      <br />
+        <%= render "devise/shared/links" %>
+      <br />
+    <% end %>
+</div>

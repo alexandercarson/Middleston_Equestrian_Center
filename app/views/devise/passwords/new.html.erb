@@ -1,0 +1,11 @@
+<h2 class='form_header'>Forgot your password?</h2>
+<div class='container'>
+  <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= f.email_field :email %>
+    <%= f.submit "Send Reset Instructions", class: 'btn btn-outline-info' %> <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= render "devise/shared/links" %>
+    <br />
+  <% end %>
+</div>

@@ -1,0 +1,35 @@
+<br>
+<%= bootstrap_form_for(@problem) do |f| %>
+<% if @problem.errors.any? %>
+<div id="error_explanation-problem">
+        <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+        <ul>
+        <% @problem.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@problem) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] }, required: true %>
+    <%= f.select :user_id, User.all.collect { |u| [u.name, u.id] } %>
+
+
+
+    <%= f.time_field :time %>
+    <%= f.text_area :description, required: true %>
+    <%= f.text_area :notes %>
+
+    <%= f.date_select('date',
+          options = { start_year: 2017, order: [:month, :day, :year]},
+          html_options = { class: 'select-date'})%>
+    <%= f.submit "Submit", class: 'btn btn-success' %> <%= link_to "Back", user_path(@current_user), class:'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Home", user_path(@current_user), class: 'btn btn-sm btn-primary' %>
+  <% end %>
+</div>

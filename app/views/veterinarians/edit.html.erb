@@ -1,0 +1,28 @@
+<br />
+<%= simple_form_for @veterinarian do |f| %>
+<% if @veterinarian.errors.any? %>
+<div id="error_explanation-veterinarian">
+        <h2><%= pluralize(@veterinarian.errors.count, "error") %> prohibited this veterinarian from being saved:</h2>
+        <ul>
+        <% @veterinarian.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% end %>
+<div class='container'>
+  <%= bootstrap_form_for(@veterinarian) do |f| %>
+    <%= f.text_area :name %>
+    <%= f.number_field :phone_number %>
+    <%= f.text_area :address %>
+    <%= f.text_area :city %>
+    <%= f.select :state, State.all.collect { |s| [s.state_name, s.state_code] } %>
+    <%= f.text_area :zip_code %>
+    <%= f.submit "Update Veterinarian", class: 'btn btn-outline-primary' %> 
+      <%= link_to "Back", user_path(), class: 'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Delete Veterinarian", veterinarian_path(@veterinarian.id), data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger', method: :delete %>
+  <% end %>
+</div>

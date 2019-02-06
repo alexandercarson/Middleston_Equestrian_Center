@@ -1,0 +1,18 @@
+<br>
+  <div class='container'>
+    <div class="row">
+      <div class="small-6 large-centered columns">
+        <div id='coggin_info'>
+          <h1> For: <%= @coggin.horse.barn_name%><h1>
+          <div id='coggin_data'>
+            <h3>Coggins File ID: <%= @coggin.id %></h3>
+            <% if current_user.admin? %>
+              <%= link_to "Download Coggins File", @coggin.coggin_url, download: '', class: "btn btn-outline-primary" %><br />
+              <%= link_to 'Edit', edit_coggin_path(params[:id]), class: "btn btn-outline-info" %><br />
+              <%= link_to 'Back to Horse', horse_path(@coggin.horse_id), class: "btn btn-outline-secondary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

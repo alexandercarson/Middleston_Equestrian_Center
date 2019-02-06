@@ -1,0 +1,21 @@
+<hr>
+<br>
+<div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+          <div class="card " style="width: 40rem;">
+            <h4 class="card-header text-center"><%= @charge.horse.barn_name%></h4>
+              <div class="card-body text-center">
+                <p class="card-text"><strong>Amount Charged: </strong><mark>$<%= @charge.amount%></mark></p>
+                <p class="card-text"><strong>Due Date: </strong><%= @charge.date.strftime("%B %d, %Y")%></p>
+                <p class="card-text"><strong>Charge Description: </strong><br/>
+                <%= @charge.description %></p>
+                <hr>
+                <% if current_user.admin? %>
+                  <%= link_to 'Edit', edit_charge_path(params[:id]), class: 'btn btn-outline-primary' %>
+                  <%= link_to 'Back to Horse', horse_path(@charge.horse_id), class: 'btn btn-outline-secondary' %>
+                <% end %>
+              </div>
+        </div>
+      </div> 
+</div>
+  

@@ -1,0 +1,21 @@
+<br />
+      <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="card " style="width: 40rem;">
+            <div class="card-header text-center"><%= @veterinarian.name  %></div>
+              <div class="card-body text-center">
+                <p class="card-title"><strong>Phone Number: </strong><%= @veterinarian.phone_number %></p>
+                <p class="card-title"><strong>Address: </strong><%= @veterinarian.address %></p>
+                <p class="card-title"><strong>City: </strong><%= @veterinarian.city %></p>
+                <p class="card-title"><strong>State: </strong><%= @veterinarian.state %></p>
+                <p class="card-title"><strong>Zip Code: </strong><%= @veterinarian.zip_code %></p>
+              <div>
+              <% if current_user.admin? %>
+                <%= link_to 'Edit', edit_veterinarian_path(params[:id]), class: 'btn btn-lg btn-outline-primary' %>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<br>
+  <div class='container'>
+    <div class="row">
+      <div class="small-6 large-centered columns">
+        <div id='problem_info'>
+          <h1> For: <%= @problem.horse.barn_name%><h1>
+          <div id='problem_data'>
+            <h3><%= @problem.date.strftime("%B %d, %Y")%> at <%= @problem.time %></h3>
+            <h3>Description: <%= @problem.description %></h3>
+            <h3>Additional Info: <%= @problem.notes %></h3>
+            <h3>Owners Email Address:  <%= @problem.user.email %></h3>
+            <br />
+            <% if current_user.admin? %>
+              <%= link_to 'Edit', edit_problem_path(params[:id]) %><br />
+              <%= link_to 'Back to Horse', horse_path(@problem.horse_id) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div

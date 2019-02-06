@@ -1,0 +1,30 @@
+<div class='wrapper'>
+<%= simple_form_for @horse do |f| %>
+<% if @horse.errors.any? %>
+<div id="error_explanation-horse">
+        <h2><%= pluralize(@horse.errors.count, "error") %> prohibited this horse from being saved:</h2>
+        <ul>
+        <% @horse.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@horse) do |f| %>
+    <%= f.text_area :registered_name, required: true %>
+    <%= f.text_area :barn_name, required: true %>
+    <%= f.text_area :breed, required: true %>
+    <%= f.text_area :discipline %>
+    <%= f.select :user_id, User.all.collect { |p| [p.name, p.id] }, {label: 'Horse Owner'}  %>
+    <%= f.select :veterinarian_id, Veterinarian.all.collect { |v| [v.name, v.id] } %>
+    <%= f.select :farrier_id, Farrier.all.collect { |f| [f.name, f.id] } %>
+    <%= f.file_field :picture, label: 'Choose Picture', required: true %>
+    <%= f.submit "Submit", class: 'btn btn-success' %> <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Home", user_path(@current_user), class: 'btn btn-sm btn-primary' %>
+  <% end %>
+</div>

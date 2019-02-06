@@ -1,0 +1,38 @@
+<br></br>
+<%= bootstrap_form_for(@event) do |f| %>
+<% if @event.errors.any? %>
+<div id="error_explanation-event">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+<div class="row">
+  <div class="small-6 large-centered columns">
+    <div class="form-inputs">
+      <h1 class="form_header">Edit Event</h1>
+      <%= f.label :horse_id, 'Horse', class: 'form-actions' %>
+      <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+      <%= f.label :date, 'Date', class: 'form-actions' %>
+      <%= f.date_select('date',
+          options = { start_year: 2017, order: [:month, :day, :year]},
+          html_options = { class: 'select-date'})  %>
+          <%= f.label :time, 'Time', class: 'form-actions' %>
+          <%= f.time_field :time %>
+      <%= f.label :description, 'Description', class: 'form-actions' %>
+      <%= f.text_field :description %>
+      <%= f.label :notes, 'Additional Info', class: 'form-actions' %>
+      <%= f.text_field :notes %>
+      <div class="form-actions">
+        <%= f.submit 'Update' %>
+        <p><%= link_to "Delete Event", event_path(@event.id), data: { confirm: "Are you sure?" }, method: :delete %> <br />
+          <%= link_to "Back", :back, class: 'link' %></p>
+        </div>
+    </div>
+  </div>
+    <% end %>
+  </div>

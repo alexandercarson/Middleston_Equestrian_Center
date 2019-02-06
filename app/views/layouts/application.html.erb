@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Middleton Equestiran Center | Horse Manager</title>
+          <!-- Required meta tags -->
+      <%= csrf_meta_tags %>
+      <%= stylesheet_link_tag    'application', media: 'all' %>
+      <%= javascript_include_tag 'application' %>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+
+    <!-------- START NAVIGATION -------->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <%= image_tag 'headerlogo.png', {class: 'img-fluid'} %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+        <li class='nav-link <%= params[:controller] == 'user' ? 'active' : '' %>'>
+                  <%= link_to "Home", root_path(current_user) %>
+        </li>
+        <% if user_signed_in? %>
+        <li class='nav-link <%= params[:controller] == 'user' ? 'active' : '' %>'>
+                  <%= link_to "My Account", user_path(current_user) %>
+                  </li>
+        <li class='nav-link <%= params[:controller] == 'user' ? 'active' : '' %>'>
+                  <%= link_to "Edit Account", edit_user_registration_path %>
+                  </li>
+                  <% else %>
+                  <% end %>
+        </li>
+    </div>
+  </nav>
+  <!-------- END NAVIGATION -------->
+
+  <!-------- START HEADER INFO -------->
+  <body class="py-4">
+      <section class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading display-4">Middleton Equestrian Center</h1>
+          <p class="lead text-muted">Horse Mangement Application</p>
+          <%= image_tag 'jokejock.jpg', {class: 'img-fluid'} %>
+                  <% if user_signed_in? %>
+          </div>
+        </div>
+      </section>
+  <!-------- END HEADER INFO -------->
+  <!-------- START BODY -------->
+  <div class='container'>
+    <div class="text-center row mb-3">
+        <div class="col-md-3 themed-grid-col"><p><%= link_to "Home", user_path(current_user), {class: 'btn btn-outline-primary'} %></p></div>
+        <div class="col-md-3 themed-grid-col"><p><%= link_to "Back", :back, {class: 'btn btn-outline-dark'} %></p></div>
+        <div class="col-md-3 themed-grid-col"><p><%= link_to "Edit Account", edit_user_registration_path, {class: 'btn btn-outline-info'} %></p></div>
+        <div class="col-md-3 themed-grid-col"><p><%= link_to "Sign Out", destroy_user_session_path, {method: :delete, class: 'btn btn-outline-danger'} %></p></div>
+          <% else %>
+        <div class="text-center"><p><%= link_to "Home", root_path, {class: 'btn btn-outline-primary'} %></p></div>
+          <% end %>
+      </div>
+  <!-- Alerts & Messages -->
+  <% unless flash.empty? %>
+      <script type="text/javascript">
+            <% flash.each do |f| %>
+          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+          toastr['<%= type %>']('<%= f[1] %>');
+      <% end %>
+      </script>
+  <% end %>
+    <% if flash[:notice] %>
+      <div class='alert alert-success'><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class='alert alert-danger'><%= flash[:alert] %></div>
+    <% end %>
+  <!-- End Alerts & Messages-->
+
+  <div class="container">
+      <%= yield %>
+  </div>
+    </body>
+    <!-------- END BODY -------->
+
+
+    <!-------- START FOOTER -------->
+    <!--------END FOOTER -------->
+  </html>
+
+

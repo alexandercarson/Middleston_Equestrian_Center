@@ -1,0 +1,33 @@
+<br></br>
+<%= simple_form_for @note do |f| %>
+<% if @note.errors.any? %>
+<div id="error_explanation-note">
+        <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+        <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+      <%= f.label :horse_id, 'Horse', class: 'form-actions' %>
+      <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+      <%= f.label :text, 'Enter Note', class: 'form-actions' %>
+      <%= f.text_area :text %>
+      <div class="form-actions">
+        <%= f.button :submit, 'Update' %>
+        <p><%= link_to "Delete Note", note_path(@note.id), data: { confirm: "Are you sure?" }, method: :delete %> <br />
+          <%= link_to "Back", :back, class: 'link' %></p>
+    <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@note) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+    <%= f.text_area :text %>
+    <%= f.submit "Update", class: 'btn btn-success' %> <%= link_to "Back", user_path(@current_user), class:'btn btn-outline-secondary' %>
+    <br />
+    <br />
+    <%= link_to "Delete Note", note_path(@note.id), data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger' %>
+  <% end %>
+</div>

@@ -1,0 +1,18 @@
+
+<div>   
+  <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="card " style="width: 40rem;">
+          <div class="card-header text-center"><h3>Farriers</h3>
+            <div class="card-body text-center">
+              <% @farriers.each do |f| %>
+                <p class="card-title">
+                <a href= <%= farrier_path(f.id) %>><%= f.name %><br/></a>
+                <div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<br>
+<div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+          <div class="card " style="width: 40rem;">
+            <h4 class="card-header text-center"> <Strong>Farrier Name: </strong> <%= @farrier.name  %></h4>
+              <div class="card-body text-center">
+                <p class="card-text"><Strong>Phone Number: </strong><%= @farrier.phone_number %></p>
+                <p class="card-text"><Strong>Address: </strong><%= @farrier.address %></p>
+                <p class="card-text"><Strong>City: </strong><%= @farrier.city %>, <%= @farrier.state %> <%= @farrier.zip_code %></p>
+                <hr>
+                <% if current_user.admin? %>
+                  <%= link_to 'Edit Farrier', edit_farrier_path(params[:id]), class: 'btn btn-lg btn-outline-primary' %>
+                <% end %>
+              </div>
+        </div>
+      </div> 
+</div>
+  

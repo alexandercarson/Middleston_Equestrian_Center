@@ -1,0 +1,26 @@
+<% if @farrier.errors.any? %>
+<div id="error_explanation-farrier">
+        <h2><%= pluralize(@horse.errors.count, "error") %> prohibited this farrier from being saved:</h2>
+        <ul>
+        <% @farrier.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+<div class='container'>
+  <h1 class="form_header">Add New Farrier</h1>
+    <%= bootstrap_form_for(@farrier) do |f| %>
+      <%= f.text_area :name, required: true %>
+      <%= f.telephone_field :phone_number, required: true %>
+      <%= f.text_area :address, required: true %>
+      <%= f.text_area :city, required: true %>
+      <%= f.select :state, State.all.collect { |s| [s.state_name, s.state_code] } %>
+      <%= f.number_field :zip_code, required: true %>
+      <%= f.submit "Submit", class: 'btn btn-success' %> 
+      <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
+      <br />
+      <br />
+  <% end %>
+</div>
