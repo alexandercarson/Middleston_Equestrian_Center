@@ -91,6 +91,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'carrierwave'
 end
 
 gem 'mocha', group: :test
