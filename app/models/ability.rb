@@ -2,6 +2,17 @@ class Ability
   include CanCan::Ability
 
 end
+
+
+
+
+
+
+
+# Define abilities for the passed in user here. For example:
+    #
+
+    #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
@@ -19,4 +30,3 @@ end
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-

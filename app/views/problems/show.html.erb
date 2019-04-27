@@ -5,14 +5,13 @@
         <div id='problem_info'>
           <h1> For: <%= @problem.horse.barn_name%><h1>
           <div id='problem_data'>
-            <h3><%= @problem.date.strftime("%B %d, %Y")%> at <%= @problem.time %></h3>
-            <h3>Description: <%= @problem.description %></h3>
-            <h3>Additional Info: <%= @problem.notes %></h3>
-            <h3>Owners Email Address:  <%= @problem.user.email %></h3>
+            <h3><%= @problem.date.strftime("%B %d, %Y, %t")%> at <%= @problem.time %></h3><br />
+            <h3>Description: <%= @problem.description %></h3><br />
+            <h3>Additional Info: <%= @problem.notes %></h3><br />
             <br />
             <% if current_user.admin? %>
-              <%= link_to 'Edit', edit_problem_path(params[:id]) %><br />
-              <%= link_to 'Back to Horse', horse_path(@problem.horse_id) %>
+              <%= link_to 'Edit Problem', edit_problem_path(params[:id]), class: "btn btn-primary" %>
+              <%= link_to 'Back to Horse', horse_path(@problem.horse_id), class: "btn btn-secondary" %>
             <% end %>
           </div>
         </div>

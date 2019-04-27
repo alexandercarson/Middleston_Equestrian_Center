@@ -1,7 +1,4 @@
 class Charge < ApplicationRecord
-  belongs_to :horse
-
-  validates :date, presence: true
-  validates :description, presence: true
-  validates :amount, presence: true, numericality: true
+    has_and_belongs_to_many :horses
+    belongs_to :user
 end

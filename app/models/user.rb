@@ -4,17 +4,11 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable, :confirmable
-  
-  ROLES = %w[superAdmin admin staff]
-
 
   has_many :horses
-  has_many :roles
+  has_many :charges
   has_many :problems
-  has_many :coggins
-
-
-
+  
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, on: :create
@@ -24,7 +18,4 @@ class User < ApplicationRecord
   validates :state, presence: true
   validates :zip_code, presence: true, numericality: true
 
-  def admin?
-    role == "admin"
-  end
 end

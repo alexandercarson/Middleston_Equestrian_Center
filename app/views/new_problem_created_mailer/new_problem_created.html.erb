@@ -1,0 +1,45 @@
+
+
+<h1>A problem has been created for your horse: <b><%= @horse.barn_name%></b></h1>
+<hr>
+<h3> Hello <%= @horse.user.name%>, </h3>
+<p>
+<br />
+<br />
+On <%= @problem.date %> at <%= @problem.time %> a problem was submitted for your horse.
+<br />
+<br />
+This was submitted by: <strong><%= @current_user.name %>.</strong>
+<br />
+<br />
+The results of the issue can be found by logging in <a href="#"><strong>here:</strong></a>
+and going to your profile.
+<br />
+<br />
+Once in your profile, click the problems link to see all current and active problems.
+<br />
+<br />
+We've also included the submission details below:
+<br />
+<br />
+Problem Description: <%= @problem.description %>
+<br />
+<br />
+Any notes that were added to the problem will appear here: <%= @problem.notes%>
+<br />
+<br />
+If you have any issues please email us at: <a href="mailto:maneframeapp@gmail.com">maneframeapp@gmail.com</a>
+<br />
+<br />
+<br />
+Thank You!
+</p>
+
+<!---<strong><a href= maneframeapp@gmail.com></strong></a>
+
+
+
+
+
+
+

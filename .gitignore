@@ -19,6 +19,11 @@
 .byebug_history
 
 /coverage
+public/uploads
 
 #api
 /config/application.yml
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -16,10 +16,7 @@
 <div class='container'>
   <%= bootstrap_form_for(@problem) do |f| %>
     <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] }, required: true %>
-    <%= f.select :user_id, User.all.collect { |u| [u.name, u.id] } %>
-
-
-
+    <%= f.hidden_field :user_id, User.all.collect { |u| [u.name, u.id], required: true } %>
     <%= f.time_field :time %>
     <%= f.text_area :description, required: true %>
     <%= f.text_area :notes %>

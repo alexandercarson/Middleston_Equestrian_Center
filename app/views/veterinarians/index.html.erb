@@ -1,134 +1,22 @@
-<section class="training-area section-gap">
+
+<div>
+  <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="card " style="width: 40rem;">
+          <div class="card-header text-center"><h3>Veterinarians</h3>
+            <div class="card-body text-center">
+              <% @veterinarians.each do |v| %>
+                <p class="card-title">
+                <a href= <%= veterinarian_path(v.id) %>><%= v.name %></a>
+                <div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 <div class="container">
-<div class="row d-flex justify-content-center">
-<div class="col-md-9 pb-40 header-text text-center">
-<h1 class="pb-10">Our Offered Training Programs</h1>
-<p>
-Who are in extremely love with eco friendly system.
-</p>
+  
 </div>
-</div>
-<div class="row">
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr1.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr2.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr3.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr4.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr5.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-<div class="col-lg-4 cl-md-6">
-<div class="single-training">
-<div class="thumb relative">
-<div class="overlay-bg"></div>
-<img class="img-fluid" src="img/pages/tr6.jpg" alt="">
-<a class="admission-btn" href="#">Admission Going on</a>
-</div>
-<div class="details">
-<div class="title justify-content-between d-flex">
-<a href="#"><h4>Bsc in Film &amp; Media</h4></a>
-<p class="price">
-$2500
-</p>
-</div>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>

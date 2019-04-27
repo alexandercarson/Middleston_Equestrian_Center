@@ -10,19 +10,66 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require turbolinks
-//= require toastr
-//= require_tree .
 //= require jquery3
+//= require rails-ujs
+//= require jquery.timepicker.js
 //= require popper
+//= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery.mask
+//= require toastr
+//= require moment
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require jquery-confirm
+//= require fabric
+//= require_tree .
+//= jquery.uploadfile
+//= require fullcalendar
+//= require daterangepicker
 //= require_tree .
 
 
-$(document).ready(function() {
-    $('[data-js-hide-link]').click(function(event){
-      alert('You clicked the Hide link');
-      event.preventDefault();
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+      $("#myModal").modal();
     });
-  }
+  });
+
+  $(document).ready(function(){
+    $("#editUserBtn").click(function(){
+      $("#editUsers").modal();
+    });
+  });
+
+  $(document).ready(function(){
+    $('#phoneNum').mask('(000) 000-0000');
+      $("#zip").mask("00000-000");
+  });
+
+  $(document).ready(function() {
+    $("#problem_horse_id").on('change', function(){
+      $.confirm({
+        title: false,
+        theme: 'supervan',
+        content: 'Please press yes or hit <strong style="font-size: 20px;">Y</strong> to proceed.',
+        buttons: {
+              Yes: {
+                  // isHidden: true, // hide the button
+                  keys: ['Y'],
+                  action: function () {
+                      $.alert('Critical action <strong>was performed</strong>.');
+                  }
+              },
+              No: {
+                  keys: ['N'],
+                  action: function () {
+                      $.alert('You Clicked No.');
+                  }
+              },
+        }
+    });
+    });
+  });
+
+

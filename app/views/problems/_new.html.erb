@@ -1,0 +1,29 @@
+<br>
+<%= bootstrap_form_for(@problem) do |f| %>
+<% if @problem.errors.any? %>
+<div id="error_explanation-problem">
+        <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+        <ul>
+        <% @problem.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class='container'>
+  <%= bootstrap_form_for(@problem) do |f| %>
+    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] }, required: true %>
+    <%= f.hidden_field :user_id  %>
+    <%= f.time_field :time %>
+    <%= f.text_area :description, required: true %>
+    <%= f.text_area :notes, label: "Add Optional Note" %>
+    <%= f.date_select('date',
+          options = { start_year: 2017, order: [:month, :day, :year]},
+          html_options = { class: 'select-date'})%>
+    <%= f.submit "Submit", class: 'btn btn-success float-left' %> <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+    <%= f.text_area :notes, id: "category_textbox" %>
+  <% end %>
+</div>

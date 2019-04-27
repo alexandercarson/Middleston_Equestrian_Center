@@ -6,12 +6,20 @@
               <div class="card-body text-center">
                 <p class="card-title"><strong>Phone Number: </strong><%= @veterinarian.phone_number %></p>
                 <p class="card-title"><strong>Address: </strong><%= @veterinarian.address %></p>
-                <p class="card-title"><strong>City: </strong><%= @veterinarian.city %></p>
-                <p class="card-title"><strong>State: </strong><%= @veterinarian.state %></p>
-                <p class="card-title"><strong>Zip Code: </strong><%= @veterinarian.zip_code %></p>
+                <p class="card-text"><Strong>City: </strong><%= @veterinarian.city %>, <%= @veterinarian.state %> <%= @veterinarian.zip_code %></p>
+
               <div>
               <% if current_user.admin? %>
-                <%= link_to 'Edit', edit_veterinarian_path(params[:id]), class: 'btn btn-lg btn-outline-primary' %>
+              <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Edit Veterinarian
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                    <%= render template: 'veterinarians/edit' %>
+                    </div>
+                  </div>
               <% end %>
             </div>
         </div>

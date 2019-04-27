@@ -14,12 +14,13 @@
 
 <div class='container'>
   <%= bootstrap_form_for(@farrier) do |f| %>
+    <h3 class="display-4">Edit Farrier</h3>
     <%= f.text_field "name" %>
-    <%= f.phone_field :phone_number %>
+    <%= f.text_field :phone_number, id: 'phoneNum' %>
     <%= f.text_field :address %>
     <%= f.text_field :city %>
     <%= f.text_field :state %>
-    <%= f.number_field :zip_code %>
+    <%= f.number_field :zip_code, id: 'zip' %>
     <%= f.submit "update", class: 'btn btn-outline-primary' %> <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
     <br />
     <br />

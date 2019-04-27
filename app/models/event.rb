@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
-  belongs_to :horse
+  validates :title, presence: true
+  attr_accessor :date_range
 
-  validates :date, presence: true
-  validates :description, presence: true
-  validates :time, presence: true
-
+  def all_day_event?
+    self.start == self.start.midnight && self.end == self.end.midnight ? true : false
+  end
 end
