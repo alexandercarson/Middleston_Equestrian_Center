@@ -17,7 +17,7 @@
 default: &default
   adapter: mysql2
   database: horse_manager
-  username: root
+  username: joe
   password: joseph8923!
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
@@ -79,8 +79,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: mysql2
-  database: horse_manager
-  username: root
-  password: joseph8923!
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: maneframelive.cn17wjg4qvig.us-east-2.rds.amazonaws.com
+  database: maneframelive
+  username: maneframeadmin
+  password: Alexander8923!
+  port: 3306

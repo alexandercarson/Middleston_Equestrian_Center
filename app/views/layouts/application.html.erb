@@ -3,10 +3,12 @@
     <head>
       <title>Middleton Equestiran Center | Horse Manager</title>
           <!-- Required meta tags -->
-      <%= csrf_meta_tags %>
       <%= stylesheet_link_tag    'application', media: 'all' %>
-      <%= javascript_include_tag 'application' %>
+      <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/'  %>
+      <%= csrf_meta_tags %>
+      <%= tag :meta, name: "stripe-key", content: Rails.application.credentials.stripe_public %>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     </head>
 
     <!-------- START NAVIGATION -------->
@@ -28,6 +30,8 @@
         <li class='nav-link <%= params[:controller] == 'user' ? 'active' : '' %>'>
                   <%= link_to "Edit Account", edit_user_registration_path %>
                   </li>
+        <li class='nav-link <%= params[:controller] == 'user' ? 'active' : '' %>'>
+                  <%= link_to "Sign Out", destroy_user_session_path, { method: :delete } %></li>
                   <% else %>
                   <% end %>
         </li>
@@ -36,52 +40,34 @@
   <!-------- END NAVIGATION -------->
 
   <!-------- START HEADER INFO -------->
-  <body class="py-4">
-      <section class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading display-4">Middleton Equestrian Center</h1>
-          <p class="lead text-muted">Horse Mangement Application</p>
-          <%= image_tag 'jokejock.jpg', {class: 'img-fluid'} %>
-                  <% if user_signed_in? %>
+  <body>
+    <div class="container">
+      <div class="py-4"><br/>
+        <section class="jumbotron jumbotron-fluid text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading display-4">Middleton Equestrian Center</h1>
+              <p class="lead text-muted">Horse Mangement Application</p>          
           </div>
-        </div>
-      </section>
+        </section>
+      </div>  
+    </div>
   <!-------- END HEADER INFO -------->
   <!-------- START BODY -------->
-  <div class='container'>
-    <div class="text-center row mb-3">
-        <div class="col-md-3 themed-grid-col"><p><%= link_to "Home", user_path(current_user), {class: 'btn btn-outline-primary'} %></p></div>
-        <div class="col-md-3 themed-grid-col"><p><%= link_to "Back", :back, {class: 'btn btn-outline-dark'} %></p></div>
-        <div class="col-md-3 themed-grid-col"><p><%= link_to "Edit Account", edit_user_registration_path, {class: 'btn btn-outline-info'} %></p></div>
-        <div class="col-md-3 themed-grid-col"><p><%= link_to "Sign Out", destroy_user_session_path, {method: :delete, class: 'btn btn-outline-danger'} %></p></div>
-          <% else %>
-        <div class="text-center"><p><%= link_to "Home", root_path, {class: 'btn btn-outline-primary'} %></p></div>
-          <% end %>
-      </div>
-  <!-- Alerts & Messages -->
-  <% unless flash.empty? %>
-      <script type="text/javascript">
-            <% flash.each do |f| %>
-          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-          toastr['<%= type %>']('<%= f[1] %>');
-      <% end %>
-      </script>
+  <% if user_signed_in? %>
   <% end %>
+  <!-- Alerts & Messages -->
     <% if flash[:notice] %>
-      <div class='alert alert-success'><%= flash[:notice] %></div>
+      <div class='alert alert-success text-center'><%= flash[:notice] %></div>
     <% end %>
     <% if flash[:alert] %>
-      <div class='alert alert-danger'><%= flash[:alert] %></div>
+      <div class='alert alert-danger text-center'><%= flash[:alert] %></div>
     <% end %>
   <!-- End Alerts & Messages-->
-
-  <div class="container">
       <%= yield %>
-  </div>
-    </body>
+     <div id='remote_container'></div>
+
+  </body>
     <!-------- END BODY -------->
-
-
     <!-------- START FOOTER -------->
     <!--------END FOOTER -------->
   </html>

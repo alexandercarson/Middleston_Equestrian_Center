@@ -1,8 +1,3 @@
-<% if !flash[:notice].blank? %>
-   <div class = "alert alert-info">
-      <%= flash[:notice] %>
-   </div>
-<% end %>
 
 <br />
 <div class="text-center">
@@ -16,7 +11,7 @@
    <thead>
       <tr>
          <th>Horse ID:</th>
-         <th>Name: </th>
+         <th>Horse Name: </th>
          <th>Download Link: </th>
          <th>Delete Record?</th>
       </tr>
@@ -24,9 +19,9 @@
    <tbody>
       <% @coggins.each do |coggin| %>
          <tr>
-            <td># <%= coggin.horse.id %> </td>
-            <td><%= coggin.horse.barn_name %></td>
-            <td><%= link_to "Download Coggins Report", coggin.coggin_url, class: "btn btn-outline-primary" %> <% data: {'js-hide-link' => true} %> </td>
+            <td># <%= coggin.horse_id %> </td>
+            <td><%= coggin.horse.try(:barn_name) %></td>
+            <td><%= link_to "Download Coggins Report", coggin.coggin_url, class: "btn btn-outline-primary" %> </td>
             <td><%= button_to "Delete",  coggin, method: :delete, class: "btn btn-outline-danger", confirm: "Are you sure that you wish to delete #{coggin.id}?" %></td>
          </tr>
 

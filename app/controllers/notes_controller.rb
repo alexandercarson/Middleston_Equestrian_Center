@@ -1,17 +1,23 @@
 class NotesController < ApplicationController
   before_action :authorize_user, except: [:show]
+  after_action :verify_authorized
+
 
   def show
     @note = Note.find(params[:id])
     @horse = @note.horse
+    authorize @note
   end
 
   def new
     @note = Note.new
+    authorize @note
+
   end
 
   def create
     @note = Note.new(note_params)
+    authorize @note
     if @note.save
       flash[:notice] = "New Note Added!"
       redirect_to @note
@@ -23,10 +29,12 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
+    authorize @note
   end
 
   def update
    @note = Note.find(params[:id])
+   authorize @note
    if @note.update_attributes(note_params)
      flash[:notice] = "Note Updated!"
      redirect_to @note
@@ -37,7 +45,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note = Note.find(params[:id])
-
+    authorize @note
     if @note.destroy
       flash[:notice] = 'Note has been deleted.'
       redirect_to new_note_path

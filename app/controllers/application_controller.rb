@@ -1,11 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  include Pundit
+  protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied. You are not authorized to access the requested page."
-    redirect_to root_path and return
-  end
-
 
   def after_sign_in_path_for(resource_or_scope)
    current_user
@@ -14,10 +10,16 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(resource)
     current_user
   end
-  
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
     protected
 
-  
+    def user_not_authorized
+      flash[:alert] = "You are not authorized to perform this action!"
+      redirect_to(request.referrer || current_user)
+    end
+
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [
         :name,
@@ -26,11 +28,13 @@ class ApplicationController < ActionController::Base
         :address,
         :city,
         :state,
-        :zip_code
+        :zip_code,
+        :password,
+        :password_confirmation
       ])
 
     registration_params = [
-      :name, 
+      :name,
       :phone_number, 
       :address, 
       :city, 
@@ -38,11 +42,13 @@ class ApplicationController < ActionController::Base
       :zip_code,
       :email,
       :password,
-      :password_confirmation,
-      { roles: [] },
+      :password_confirmation
+
       ]
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(registration_params) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(registration_params << :current_password) }
     end
+    
+
   end
   

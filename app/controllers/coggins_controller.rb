@@ -1,24 +1,30 @@
 class CogginsController < ApplicationController
-  before_action :authorize_user, except: [:show]
-
+  before_action :authorize_user
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
+  
   def index
-    @coggins = Coggin.all
-  end
+    @coggins = policy_scope(Coggin).all
+    #@horse  = Horse.find()
+    end
 
   def show
     @coggin = Coggin.find(params[:id])
     @horse = @coggin.horse
+    authorize @coggin
   end
 
   def new
     @coggin = Coggin.new
+    authorize @coggin
   end
 
   def create
     @coggin = Coggin.new(coggin_params)
+    authorize @coggin
     if @coggin.save
-      flash[:notice] = "New Coggin Added!"
-      redirect_to @coggin
+      flash[:notice] = "New Coggins File Added!"
+      redirect_to coggins_path
     else
       flash[:alert] = "New Coggin Not Created"
       render :new
@@ -27,10 +33,12 @@ class CogginsController < ApplicationController
 
   def edit
     @coggin = Coggin.find(params[:id])
+    authorize @coggin
   end
 
   def update
    @coggin = Coggin.find(params[:id])
+   authorize @coggin
    if @coggin.update_attributes(coggin_params)
      flash[:notice] = "Coggin Updated!"
      redirect_to @coggin
@@ -40,11 +48,11 @@ class CogginsController < ApplicationController
  end
 
   def destroy
-    @coggin = Coggin.find(params[:id])
-
+    @coggin = policy_scope(Coggin).find(params[:id])
+    authorize @coggin
     if @coggin.destroy
       flash[:notice] = 'Coggin has been deleted.'
-      redirect_to new_coggin_path
+      redirect_to coggins_path
     end
   end
 
@@ -58,8 +66,10 @@ class CogginsController < ApplicationController
   end
 
   def authorize_user
-    if !user_signed_in? || !current_user.admin?
-      raise ActionController::RoutingError.new("Not Found")
+    if !user_signed_in?
+      redirect_to root_url
+      flash[:alert] = "Access Denied: You need to sign in or sign up before continuing!"
     end
   end
+  
 end

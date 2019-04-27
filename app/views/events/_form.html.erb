@@ -1,0 +1,21 @@
+<%= bootstrap_form_for(@event, remote: true) do |f| %>
+  <div class="form-inputs">
+    <%= f.text_field :title, label: "Event Title" %>
+    <%= f.text_field :description, label: "Event Description" %>
+    <%= f.text_field :date_range, label: "Event Date", class: "form-control input-sm date-range-picker" %>
+    <%= f.hidden_field :start, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
+    <%= f.hidden_field :end, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
+    <%= f.select :color, [['Show','blue'], ['Event','green'], ['Vaccinations','indigo'], ['Misc','red']], { label: 'Event Type' } %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Submit", class: 'btn btn-primary'%>
+    <%= link_to 'Delete', 
+                event, 
+                method: :delete, 
+                class: 'btn btn-danger', 
+                data: { confirm: 'Are you sure?' }, 
+                remote: true unless @event.new_record? %>
+  </div>
+<% end %>

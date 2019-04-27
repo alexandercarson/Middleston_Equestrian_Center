@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.0'
+ruby '2.6.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -12,8 +12,7 @@ group :test do
   gem 'database_cleaner'
 end
 
-#jquery
-gem 'jquery-rails'
+
 #bootstrap
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'bootstrap', '~> 4.2.1'
@@ -23,12 +22,17 @@ gem 'sprockets-es6'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge'
+#javascript/jquery
+gem 'jquery_mask_rails', '~> 0.1.0'
+gem 'jquery-rails'
 #other
+gem 'notifications', '~> 0.6.0'
+gem 'sweet-alert-confirm'
+gem 'sweetalert2'
 gem "nifty-generators"
 gem 'httparty'
 gem 'figaro'
 gem 'toastr-rails'
-gem 'cancancan', '~> 2.0'
 gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -40,9 +44,19 @@ gem 'foundation-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mini_racer', platforms: :ruby
+gem 'hirb'
+gem 'pundit'
+gem 'jquery-fileupload-rails'
+gem 'mysql2'
+gem 'bundler', '~> 2.0', '>= 2.0.1'
+gem 'jquery-timepicker-rails'
+
 
 #stripe
 gem 'stripe'
+gem 'stripe_event'
+gem "money-rails"
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -53,7 +67,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+ gem 'bcrypt', '~> 3.1.7'
 
 group :development do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -68,18 +82,15 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
   gem 'faker', github: 'stympy/faker'
   gem 'launchy', require: false
-  gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
   gem 'valid_attribute'
   gem 'rails-controller-testing'
+  gem 'stripe-ruby-mock'
 end
 
 group :production do
   gem 'rails_12factor'
-  gem 'mysql2'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mocha', group: :test

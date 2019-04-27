@@ -10,14 +10,26 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ @import require sweetalert2
  @import rails_bootstrap_forms
  @import require toastr
- @import require_tree .
+ @import require jquery.fileupload
+ @import jquery.fileupload-ui
+ @import jquery-datetimepicker
+ @import jquery.timepicker.css
  @import require_self
+ @import require_tree .
  */
+
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "fullcalendar";
+@import "daterangepicker";
+@import "jquery-confirm";
+@import "uploadfile";
+
+
 
 
 
@@ -41,3 +53,25 @@
   .list-group-mine .list-group-item:hover {
     background-color: red;
   }
+
+  .overflow-prob {
+    overflow: scroll;
+}
+
+#allHorses {
+  overflow-y: scroll;
+  color: blue;
+}
+
+#allAdmin {
+  color: darkred  
+}
+
+#adminViews {
+  height:197px;
+  overflow-y: scroll;
+}
+
+
+
+

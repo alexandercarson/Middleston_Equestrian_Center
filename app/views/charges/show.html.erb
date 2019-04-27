@@ -1,21 +1,26 @@
-<hr>
-<br>
-<div class="container h-100">
-      <div class="row h-100 justify-content-center align-items-center">
-          <div class="card " style="width: 40rem;">
-            <h4 class="card-header text-center"><%= @charge.horse.barn_name%></h4>
-              <div class="card-body text-center">
-                <p class="card-text"><strong>Amount Charged: </strong><mark>$<%= @charge.amount%></mark></p>
-                <p class="card-text"><strong>Due Date: </strong><%= @charge.date.strftime("%B %d, %Y")%></p>
-                <p class="card-text"><strong>Charge Description: </strong><br/>
-                <%= @charge.description %></p>
-                <hr>
-                <% if current_user.admin? %>
-                  <%= link_to 'Edit', edit_charge_path(params[:id]), class: 'btn btn-outline-primary' %>
-                  <%= link_to 'Back to Horse', horse_path(@charge.horse_id), class: 'btn btn-outline-secondary' %>
-                <% end %>
-              </div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <p> Hello,</p> 
+            <p> The charge for <em><%= @charge.description %></em> in the amount of <mark>$<%= @charge.amount%></mark>
+            was created on: <b><%= @charge.created_at.strftime("%b. %d, %Y,  %I:%M %p ") %></b></p>
+            <p>If you would like to settle this charge now, you can do so by clicking the pay now button!</p>
+                <br />
+            <p> The last update to this charge was on:
+            <b><%= @charge.updated_at.strftime("%b. %d, %Y, %I:%M %p") %></b></p>
+                <br />
+            <p class="btn btn-primary">Pay Now</p>
+
         </div>
-      </div> 
+    </div>
+    <br />
+    <% if current_user.admin? %>
+        <%= link_to 'Edit', edit_charge_path(params[:id]) %> <br />
+        <%= link_to 'Back to Horse', horse_path(@charge.horse_id) %>
+     <% else %>
+        <% if current_user.boarder? %>
+            <%= link_to 'Back', current_user %>
+        <% end %>
+        <% end %>
 </div>
-  

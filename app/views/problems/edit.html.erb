@@ -3,7 +3,6 @@
 <% if @problem.errors.any? %>
 <div id="error_explanation-problem">
         <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
-
         <ul>
         <% @problem.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -11,26 +10,31 @@
         </ul>
       </div>
     <% end %>
-<div class="row">
-  <div class="small-6 large-centered columns">
-    <div class="form-inputs">
-      <h1 class="form_header">Edit Problem</h1>
-      <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
-      <%= f.hidden_field :user_id %>
-      <%= f.date_select('date',
-          options = { start_year: 2017, order: [:month, :day, :year]},
-          html_options = { class: 'select-date'})  %>
-          <%= f.text_field :time %>
-      <%= f.text_field :description %>
-      <%= f.text_area :notes %>
-      <div class="form-actions">
-        <%= f.submit 'Update' %>
-        <br />
-        <br />
-        <p><%= link_to "Delete Problem", problem_path(@problem.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-outline-danger' %> <br />
-          <%= link_to "Back", :back, class: 'link' %></p>
+<div class="container">
+  <div class="col">
+    <div class="small-6 large-centered columns">
+      <div class="form-inputs">
+        <h1 class="form_header">Edit Problem</h1>
+        <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+        <%= f.date_select('date',
+            options = { start_year: 2017, order: [:month, :day, :year]},
+            html_options = { class: 'select-date'})  %>
+        <%= f.time_field :time, :id => "timepicker" %>
+        <%= f.text_field :description %>
+        <%= f.text_area :notes %>
+        <div class="form-actions">
+          <%= f.submit 'Update', class: "btn btn-primary" %>  <%= link_to "Back", :back, class: 'btn btn-secondary' %>  <%= link_to "Delete Problem", problem_path(@problem.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-outline-danger' %>
+          <br />
+          <br />
         </div>
+      </div>
     </div>
+      <% end %>
   </div>
-    <% end %>
-  </div>
+</div>
+
+<script>
+  $(function() {
+   $('#timepicker').timepicker({ 'scrollDefault': 'now' });
+  });
+</script>

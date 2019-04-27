@@ -1,0 +1,9 @@
+
+<% @charges.each do |c| %>
+            <% if c.user_id === @horse.user_id %>
+              <a href= <%= charge_path(c.id) %>>
+              <p><%= c.created_at.strftime("%b. %d, %Y") %>: <%= c.description %>: $<%= c.amount %></p>
+              </a>
+              <% else %>
+                <% end %>
+              <% end %>

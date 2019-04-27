@@ -6,7 +6,7 @@
       <h1 class='note_data'><%= @note.created_at.strftime("%b. %d, %Y") %></h1>
       <h2 class='note_header'><%= @note.horse.barn_name  %><h2>
       <h3 class='note_data'><%= @note.text %></h3>
-      <% if current_user.admin? %>
+      <% if current_user.admin? || current_user.manager? %>
         <%= link_to 'Edit', edit_note_path(params[:id]) %> <br />
         <%= link_to 'Back to Horse', horse_path(@note.horse_id) %>
       <% end %>

@@ -1,63 +1,81 @@
 class ChargesController < ApplicationController
-  before_action :authorize_user, except: [:show]
-  
-  def show
-    @charge = Charge.find(params[:id])
-    @horse = @charge.horse
+  before_action :set_charge, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user
+
+
+  # GET /charges
+  # GET /charges.json
+  def index
+    @charges = Charge.all
   end
 
+  # GET /charges/1
+  # GET /charges/1.json
+  def show
+  end
+
+  # GET /charges/new
   def new
     @charge = Charge.new
   end
 
+  # GET /charges/1/edit
+  def edit
+  end
+
+  # POST /charges
+  # POST /charges.json
   def create
     @charge = Charge.new(charge_params)
-    if @charge.save
-      flash[:notice] = "New Charge Added!"
-      redirect_to @charge
-    else
-      flash[:alert] = "New Charge Not Created"
-      render :new
+
+    respond_to do |format|
+      if @charge.save
+        format.html { redirect_to @charge, notice: 'Charge was successfully created.' }
+        format.json { render :show, status: :created, location: @charge }
+      else
+        format.html { render :new }
+        format.json { render json: @charge.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def edit
-    @charge = Charge.find(params[:id])
+  # PATCH/PUT /charges/1
+  # PATCH/PUT /charges/1.json
+  def update
+    respond_to do |format|
+      if @charge.update(charge_params)
+        format.html { redirect_to @charge, notice: 'Charge was successfully updated.' }
+        format.json { render :show, status: :ok, location: @charge }
+      else
+        format.html { render :edit }
+        format.json { render json: @charge.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def update
-   @charge = Charge.find(params[:id])
-   if @charge.update_attributes(charge_params)
-     flash[:notice] = "Charge Updated!"
-     redirect_to @charge
-   else
-     render 'edit'
-   end
- end
-
+  # DELETE /charges/1
+  # DELETE /charges/1.json
   def destroy
-    @charge = Charge.find(params[:id])
-
-    if @charge.destroy
-      flash[:notice] = 'Charge has been deleted.'
-      redirect_to new_charge_path
+    @charge.destroy
+    respond_to do |format|
+      format.html { redirect_to charges_url, notice: 'Charge was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
   private
-
-  def charge_params
-    params.require(:charge).permit(
-      :date,
-      :description,
-      :amount,
-      :horse_id
-    )
-  end
-
-  def authorize_user
-    if !user_signed_in? || !current_user.admin?
-      raise ActionController::RoutingError.new("Not Found")
+    # Use callbacks to share common setup or constraints between actions.
+    def set_charge
+      @charge = Charge.find(params[:id])
     end
-  end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def charge_params
+      params.fetch(:charge,
+        :description,
+        :amount,
+        :stripe_email,
+        :stripe_id
+        )
+    end
 end

@@ -1,12 +1,11 @@
 
-
-<h1>A problem has been updated for your horse: <b><%= @horse.barn_name%></b></h1>
+<h2>A problem has been updated for your horse: <b><em><%= @horse.barn_name%></em></b></h2>
 <hr>
-<h3> Hello <%= @problem.user.name%>, </h3>
+<h3> Hello <%= @horse.user.name %>, </h3>
 <p>
 <br />
 <br />
-On <%= @problem.date %> at <%= @problem.time %> an update was submitted for a previous issue related to your horse.
+On <%= @problem.date.strftime("%m/%d/%Y") %> at <%= @problem.time %> an update was submitted for a previous issue related to your horse.
 <br />
 <br />
 This update was submitted by: <strong><%= @current_user.name %>.</strong>
@@ -22,26 +21,23 @@ and click on the problems link.
 <br />
 This wil allow you to see all active problems that relate to your horse.
 <br />
+<br />
 We've also included the submission details below:
 <br />
-Problem Description:
 <br />
-<%= @problem.description %>
+<hr>
+<strong>Problem Description:</strong><em> <%= @problem.description %></em>
 <br />
 <br />
-Any notes that were added to the problem will appear below:
+<strong>Notes:</strong><em> <%= @problem.notes%></em>
+<hr>
 <br />
-<%= @problem.notes%>
 <br />
-If you have any issues please email us at: <a href='user@user.com'>user@user.com</a>
-<br />
+If you have any issues please email us at: <a href="mailto:maneframeapp@gmail.com">maneframeapp@gmail.com</a>
 <br />
 <br />
 Thank You!
 </p>
-
-<!---<strong><a href= maneframeapp@gmail.com></strong></a>
-
 
 
 

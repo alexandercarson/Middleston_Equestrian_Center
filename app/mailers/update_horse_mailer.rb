@@ -7,12 +7,11 @@ default from: 'maneframeapp@gmail.com'
   #   en.horse_problem_mailer.new_problem.subject
   #  h.user.id === @user.id
 
-  def update_user(current_user, user, horse, problem)
+  def update_user(current_user, horse, problem)
     @current_user = current_user
     @horse = problem.horse
     @problem = problem
-    @user = user
-    mail to: 'joec08@gmail.com',
+    mail to: @horse.user.email,
       subject: 'An update was just submitted for your horse!'
   end
 end

@@ -5,8 +5,6 @@ class Horse < ApplicationRecord
   belongs_to :farrier
   has_many :problems
   has_many :medications
-  has_many :charges
-  has_many :events
   has_many :notes
   has_many :coggins
 

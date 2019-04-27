@@ -10,14 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_190833) do
+ActiveRecord::Schema.define(version: 2019_02_16_200630) do
 
   create_table "charges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "horse_id"
-    t.date "date", null: false
-    t.string "description", null: false
-    t.string "amount", null: false
-    t.index ["horse_id"], name: "index_charges_on_horse_id"
+    t.string "description"
+    t.string "amount"
+    t.date "date"
+    t.string "stripe_id"
+    t.string "stripe_email"
+    t.string "stripe_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
   create_table "coggins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -29,12 +34,13 @@ ActiveRecord::Schema.define(version: 2019_02_05_190833) do
   end
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "horse_id"
-    t.date "date", null: false
-    t.string "description", null: false
-    t.string "time", null: false
-    t.text "notes"
-    t.index ["horse_id"], name: "index_events_on_horse_id"
+    t.string "title"
+    t.text "description"
+    t.datetime "start"
+    t.datetime "end"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "farriers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -80,6 +86,19 @@ ActiveRecord::Schema.define(version: 2019_02_05_190833) do
     t.index ["horse_id"], name: "index_notes_on_horse_id"
   end
 
+  create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "payment_gateway_plan_identifier"
+    t.string "name"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
+    t.integer "interval"
+    t.integer "interval_count"
+    t.integer "status"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "problems", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "horse_id"
     t.date "date", null: false
@@ -94,6 +113,20 @@ ActiveRecord::Schema.define(version: 2019_02_05_190833) do
     t.string "state_code", null: false
     t.string "state_name"
     t.index ["state_code"], name: "index_states_on_state_code", unique: true
+  end
+
+  create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "plan_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "status"
+    t.string "payment_gateway"
+    t.string "payment_gateway_subscription_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "symptoms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -126,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_190833) do
     t.string "unconfirmed_email"
     t.string "role", default: "member", null: false
     t.integer "roles_mask"
+    t.string "payment_gateway_customer_identifier"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -139,4 +173,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_190833) do
     t.string "zip_code", null: false
   end
 
+  add_foreign_key "charges", "users"
+  add_foreign_key "subscriptions", "plans"
+  add_foreign_key "subscriptions", "users"
 end

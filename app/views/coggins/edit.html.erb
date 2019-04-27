@@ -1,28 +1,26 @@
 <br>
-<%= bootstrap_form_for(@coggin) do |f| %>
 <% if @coggin.errors.any? %>
-<div id="error_explanation-coggin">
-        <h2><%= pluralize(@coggin.errors.count, "error") %> prohibited this coggin from being saved:</h2>
-
-        <ul>
+  <div id="error_explanation-coggin">
+    <h2><%= pluralize(@coggin.errors.count, "error") %> prohibited this coggin from being saved:</h2>
+      <ul>
         <% @coggin.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
-        </ul>
-      </div>
-    <% end %>
-<div class="row">
-  <div class="small-6 large-centered columns">
-    <div class="form-inputs">
-      <h1 class="form_header">Edit Coggin</h1>
-      <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
+      </ul>
+  </div>
+<% end %>
+
+<%= bootstrap_form_for(@coggin) do |f| %>
+  <div class="container">
+        <h1>Edit Coggins File</h1>
+          <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
           <%= f.file_field :coggin %>
-      <div class="form-actions">
-        <%= f.submit 'Update' %>
-        <p><%= link_to "Delete Coggin", coggin_path(@coggin.id), data: { confirm: "Are you sure?" }, method: :delete %> <br />
-          <%= link_to "Back", :back, class: 'link' %></p>
+        <div>
+          <%= f.submit 'Update', class: "btn btn-success" %>
+            <%= link_to "Delete Coggins", coggin_path(@coggin.id), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+            <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
         </div>
+      </div>
     </div>
   </div>
-    <% end %>
-  </div>
+<% end %>

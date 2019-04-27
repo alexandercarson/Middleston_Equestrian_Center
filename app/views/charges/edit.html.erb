@@ -1,28 +1,13 @@
-<br>
-<%= bootstrap_form_for(@charge) do |f| %>
-<% if @charge.errors.any? %>
-<div id="error_explanation-charge">
-        <h2><%= pluralize(@charge.errors.count, "error") %> prohibited this charge from being saved:</h2>
-        <ul>
-          <% @charge.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  <% end %>
-  
-<div class='container'>
-  <%= bootstrap_form_for(@charge) do |f| %>
-    <%= f.select :horse_id, Horse.all.collect { |h| [h.barn_name, h.id] } %>
-    <%= f.number_field :amount %>
-    <%= f.text_area :description %>
-    <%= f.date_select('date',
-          options = { start_year: 2017, order: [:month, :day, :year]},
-          html_options = { class: 'select-date'})%>
-    <%= f.submit "update", class: 'btn btn-outline-primary' %> <%= link_to "Back", :back, class: 'btn btn-outline-secondary' %>
-    <br />
-    <br />
-    <%= link_to "Delete Charge", charge_path(@charge.id), data: { confirm: "Are you sure?" }, class: 'btn btn-sm btn-danger', method: :delete %>
-  <% end %>
-</div>
+<h1>Editing Charge</h1>
+
+<%= render 'form', charge: @charge %>
+
+
+<% if current_user.user.admin? || user.manager? %>
+        <%= link_to 'Edit', edit_charge_path(params[:id]) %> <br />
+     <% else %>
+        <% if current_user.boarder? %>
+            <%= link_to 'Show', @charge %> |
+            <%= link_to 'Back', current_user %>
+        <% end %>
+        <% end %>
