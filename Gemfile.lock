@@ -227,7 +227,7 @@ GEM
       tty-color (~> 0.4.0)
     popper_js (1.14.5)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (3.12.4)
     pundit (2.0.1)
       activesupport (>= 3.0.0)
     rack (2.0.7)
@@ -455,7 +455,7 @@ DEPENDENCIES
   mysql2
   nifty-generators
   notifications (~> 0.6.0)
-  puma (~> 3.7)
+  puma (~> 3.12)
   pundit
   rails (~> 5.2.2)
   rails-assets-foundation!
