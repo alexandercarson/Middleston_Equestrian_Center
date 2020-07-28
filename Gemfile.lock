@@ -157,7 +157,7 @@ GEM
     jquery-timepicker-rails (1.11.10)
       railties (>= 3.1.0)
     jquery_mask_rails (0.1.0)
-    json (2.2.0)
+    json (2.3.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
